@@ -1,5 +1,19 @@
 const { portfolioContext } = require("./portfolioData");
 
+// Strip any markdown the LLM sneaks in despite instructions
+function stripMarkdown(text) {
+  return text
+    .replace(/#{1,6}\s*/g, "")                    // headers
+    .replace(/\*\*(.+?)\*\*/gs, "$1")             // bold
+    .replace(/\*(.+?)\*/gs, "$1")                 // italic
+    .replace(/`{1,3}([^`]*)`{1,3}/g, "$1")        // code
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")      // links
+    .replace(/^[\s]*[-*+]\s+/gm, "")              // bullet points
+    .replace(/^\s*\d+\.\s+/gm, "")               // numbered lists
+    .replace(/\n{3,}/g, "\n\n")                   // excessive newlines
+    .trim();
+}
+
 async function readJsonBody(req) {
   if (req.body && typeof req.body === "object") {
     return req.body;
@@ -85,8 +99,8 @@ module.exports = async function handler(req, res) {
     }
 
     const data = await response.json();
-    const reply =
-      data.choices?.[0]?.message?.content ?? "Hmm, something went wrong on my end!";
+    const raw = data.choices?.[0]?.message?.content ?? "Hmm, something went wrong on my end!";
+    const reply = stripMarkdown(raw);
     return res.status(200).json({ reply });
   } catch (err) {
     console.error("Chat handler error:", err);

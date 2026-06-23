@@ -5,7 +5,6 @@ import { spriteSVG } from "./PixelCritters";
 const WELCOME =
   "Hey! I'm Om's portfolio bot. Ask me anything about his experience, projects, or skills!";
 
-// The wisp sprite fits the chatbot's floating helper vibe.
 const FAB_SPRITE = spriteSVG("wisp", 5);
 const BOT_AVATAR_SPRITE = spriteSVG("wisp", 3);
 
@@ -21,10 +20,18 @@ export default function Chatbot() {
 
   useEffect(() => {
     if (open) {
-      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-      inputRef.current?.focus();
+      setTimeout(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+        inputRef.current?.focus();
+      }, 50);
     }
-  }, [open, messages]);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, open]);
 
   async function send() {
     const text = input.trim();
@@ -41,19 +48,19 @@ export default function Chatbot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          // Skip the welcome message — it's not part of the real conversation
           messages: next
-            .filter((m) => m.role !== "assistant" || m !== messages[0]) // skip welcome for API
+            .slice(1)
             .map((m) => ({ role: m.role, content: m.content })),
         }),
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(data.error || "Chat request failed");
-      }
+      if (!res.ok) throw new Error(data.error || "Chat request failed");
+
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.reply || "Error reaching the bot!" },
+        { role: "assistant", content: data.reply || "Something went wrong!" },
       ]);
     } catch (err) {
       console.error("Chatbot error:", err);
@@ -61,9 +68,7 @@ export default function Chatbot() {
         ...prev,
         {
           role: "assistant",
-          content:
-            "My circuits are scrambled. Try emailing Om directly at " +
-            PERSONAL.email,
+          content: `My circuits are fried! Try emailing Om at ${PERSONAL.email}`,
         },
       ]);
     } finally {
@@ -80,27 +85,39 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating toggle button */}
-      <button
-        className="chat-fab"
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close chat" : "Open portfolio chat"}
-        title={open ? "Close" : "Chat with my portfolio bot"}
-      >
-        {open
-          ? <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 14 }}>X</span>
-          : <span dangerouslySetInnerHTML={{ __html: FAB_SPRITE }} />
-        }
-      </button>
+      {/* FAB button with "AI" indicator badge */}
+      <div className="chat-fab-wrap">
+        <span className="chat-fab-badge">AI</span>
+        <button
+          className="chat-fab"
+          onClick={() => setOpen((o) => !o)}
+          aria-label={open ? "Close chat" : "Open portfolio chat"}
+          title={open ? "Close" : "Ask Om's AI assistant"}
+        >
+          {open
+            ? <span className="chat-fab-x">✕</span>
+            : <span dangerouslySetInnerHTML={{ __html: FAB_SPRITE }} />
+          }
+        </button>
+      </div>
 
       {/* Chat panel */}
       {open && (
         <div className="chat-panel pixel-frame" role="dialog" aria-label="Portfolio chatbot">
+
+          {/* Header */}
           <div className="chat-header">
-            <span className="chat-title">ASK_OM_BOT<span className="blink">_</span></span>
-            <button className="chat-close" onClick={() => setOpen(false)}>X</button>
+            <div className="chat-header-left">
+              <span className="chat-status-dot" />
+              <span className="chat-title">ASK_OM_BOT<span className="blink">_</span></span>
+            </div>
+            <div className="chat-header-right">
+              <span className="chat-ai-badge">AI</span>
+              <button className="chat-close" onClick={() => setOpen(false)} aria-label="Close chat">✕</button>
+            </div>
           </div>
 
+          {/* Messages */}
           <div className="chat-messages">
             {messages.map((m, i) => (
               <div key={i} className={`chat-msg ${m.role}`}>
@@ -110,23 +127,26 @@ export default function Chatbot() {
                     dangerouslySetInnerHTML={{ __html: BOT_AVATAR_SPRITE }}
                   />
                 )}
-                <div className="chat-bubble">{m.content}</div>
+                {/* Use <p> so React renders text nodes with proper whitespace */}
+                <p className="chat-bubble">{m.content}</p>
               </div>
             ))}
+
             {loading && (
               <div className="chat-msg assistant">
                 <span
                   className="chat-avatar"
                   dangerouslySetInnerHTML={{ __html: BOT_AVATAR_SPRITE }}
                 />
-                <div className="chat-bubble chat-typing">
+                <p className="chat-bubble chat-typing">
                   <span>.</span><span>.</span><span>.</span>
-                </div>
+                </p>
               </div>
             )}
             <div ref={bottomRef} />
           </div>
 
+          {/* Input */}
           <div className="chat-input-row">
             <input
               ref={inputRef}
@@ -138,24 +158,43 @@ export default function Chatbot() {
               onKeyDown={handleKey}
               disabled={loading}
               maxLength={300}
+              autoComplete="off"
             />
             <button
-              className="chat-send btn"
+              className="btn chat-send"
               onClick={send}
               disabled={loading || !input.trim()}
+              aria-label="Send"
             >
-              &gt;
+              ▶
             </button>
           </div>
         </div>
       )}
 
       <style>{`
-        .chat-fab {
+        /* ── FAB ── */
+        .chat-fab-wrap {
           position: fixed;
           bottom: 28px;
           right: 28px;
           z-index: 500;
+        }
+        .chat-fab-badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          z-index: 1;
+          background: var(--magenta);
+          color: var(--bg);
+          font-family: 'Press Start 2P', monospace;
+          font-size: 7px;
+          padding: 2px 5px;
+          line-height: 1.4;
+          pointer-events: none;
+          border: 2px solid var(--bg);
+        }
+        .chat-fab {
           width: 58px;
           height: 58px;
           background: var(--panel);
@@ -174,23 +213,30 @@ export default function Chatbot() {
           animation: none;
           transform: translate(2px, 2px);
         }
-        .chat-fab svg { image-rendering: pixelated; }
+        .chat-fab svg { image-rendering: pixelated; display: block; }
+        .chat-fab-x {
+          font-family: 'Press Start 2P', monospace;
+          font-size: 13px;
+          color: var(--muted);
+        }
 
+        /* ── PANEL ── */
         .chat-panel {
           position: fixed;
-          bottom: 92px;
+          bottom: 98px;
           right: 28px;
           z-index: 499;
           width: 340px;
           max-width: calc(100vw - 48px);
           height: 480px;
-          max-height: calc(100vh - 120px);
+          max-height: calc(100vh - 130px);
           display: flex;
           flex-direction: column;
           background: var(--bg-2);
           animation: pageIn .25s ease both;
         }
 
+        /* ── HEADER ── */
         .chat-header {
           display: flex;
           align-items: center;
@@ -198,23 +244,52 @@ export default function Chatbot() {
           padding: 10px 14px;
           border-bottom: var(--px) solid var(--line);
           background: var(--panel);
+          flex-shrink: 0;
+        }
+        .chat-header-left {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .chat-header-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .chat-status-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--green);
+          border-radius: 0;
+          animation: blink 2s steps(1) infinite;
+          flex-shrink: 0;
         }
         .chat-title {
           font-family: 'Press Start 2P', monospace;
-          font-size: 10px;
+          font-size: 9px;
           color: var(--green);
+        }
+        .chat-ai-badge {
+          font-family: 'Press Start 2P', monospace;
+          font-size: 7px;
+          color: var(--bg);
+          background: var(--magenta);
+          padding: 2px 5px;
+          line-height: 1.4;
         }
         .chat-close {
           background: none;
           border: none;
           color: var(--muted);
           cursor: pointer;
-          font-size: 14px;
-          padding: 2px 6px;
+          font-size: 13px;
+          padding: 2px 4px;
           transition: color .12s;
+          font-family: 'Press Start 2P', monospace;
         }
         .chat-close:hover { color: var(--red); }
 
+        /* ── MESSAGES ── */
         .chat-messages {
           flex: 1;
           overflow-y: auto;
@@ -225,7 +300,6 @@ export default function Chatbot() {
           scrollbar-width: thin;
           scrollbar-color: var(--line) transparent;
         }
-
         .chat-msg {
           display: flex;
           gap: 8px;
@@ -235,17 +309,23 @@ export default function Chatbot() {
           flex-direction: row-reverse;
         }
         .chat-avatar {
-          font-size: 18px;
           flex-shrink: 0;
-          margin-top: 2px;
+          margin-top: 4px;
         }
+        .chat-avatar svg { image-rendering: pixelated; display: block; }
+
+        /* ── BUBBLES ── */
         .chat-bubble {
-          font-family: 'VT323', monospace;
-          font-size: 18px;
-          line-height: 1.4;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+          line-height: 1.6;
           padding: 8px 12px;
           border: 2px solid var(--line);
-          max-width: 80%;
+          max-width: 82%;
+          /* fix: preserve spaces and wrap correctly */
+          white-space: pre-wrap;
+          word-break: break-word;
+          margin: 0;
         }
         .chat-msg.assistant .chat-bubble {
           background: var(--panel);
@@ -256,22 +336,27 @@ export default function Chatbot() {
           background: rgba(82,255,168,.08);
           color: var(--green);
           border-color: var(--green);
-          text-align: right;
         }
 
+        /* ── TYPING ── */
+        .chat-typing {
+          letter-spacing: 2px;
+        }
         .chat-typing span {
           animation: blink 1s steps(1) infinite;
-          font-size: 22px;
+          font-size: 20px;
         }
         .chat-typing span:nth-child(2) { animation-delay: .3s; }
         .chat-typing span:nth-child(3) { animation-delay: .6s; }
 
+        /* ── INPUT ── */
         .chat-input-row {
           display: flex;
           gap: 8px;
           padding: 10px 12px;
           border-top: var(--px) solid var(--line);
           background: var(--panel);
+          flex-shrink: 0;
         }
         .chat-input {
           flex: 1;
@@ -283,15 +368,16 @@ export default function Chatbot() {
           padding: 8px 10px;
           outline: none;
           transition: border-color .12s;
+          min-width: 0;
         }
         .chat-input:focus { border-color: var(--green); }
         .chat-input::placeholder { color: var(--muted); }
         .chat-input:disabled { opacity: .5; }
-
         .chat-send {
-          padding: 8px 14px !important;
-          font-size: 13px !important;
+          padding: 8px 12px !important;
+          font-size: 11px !important;
           box-shadow: 3px 3px 0 0 var(--shadow) !important;
+          flex-shrink: 0;
         }
         .chat-send:disabled {
           opacity: .4;
@@ -302,4 +388,3 @@ export default function Chatbot() {
     </>
   );
 }
-
