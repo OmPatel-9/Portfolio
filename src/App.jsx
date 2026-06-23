@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import StartScreen from "./components/StartScreen";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import Chatbot from "./components/Chatbot";
 import Home from "./pages/Home";
 import Experience from "./pages/Experience";
 import Projects from "./pages/Projects";
@@ -120,6 +121,8 @@ export default function App() {
 
       <Footer />
       <Analytics />
+      <Chatbot />
     </>
   );
 }
+

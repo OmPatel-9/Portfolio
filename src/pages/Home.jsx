@@ -76,7 +76,7 @@ function BattleScene({ onNav }) {
         <div className="mon-box player-box">
           <div className="mon-name">
             <span>OM PATEL</span>
-            <span className="lv">Lv.22</span>
+            <span className="lv">Lv.20</span>
           </div>
           <div className="hp-row">
             <span className="hp-lbl">HP</span>
