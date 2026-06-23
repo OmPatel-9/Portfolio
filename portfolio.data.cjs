@@ -79,6 +79,17 @@ module.exports = {
         "Fine-tuned <b>GPT-3 and Llama 2</b> with few-shot prompting and quantization, cutting compute costs by 35% and average token usage by 28% across production workloads.",
       ],
     },
+    {
+      role: "Software Engineering Fellow",
+      date: "May 2025 - Jul 2025",
+      org: "Headstarter AI · Remote",
+      bullets: [
+        "Shipped <b>12+ responsive React/TypeScript features</b> by applying clean component structure and predictable state management, delivering consistently across 10 weeks of rapid iteration.",
+        "Reduced regressions by 15% by conducting <b>code reviews</b>, defining clearer interfaces, and strengthening edge-case handling during fast iteration cycles.",
+        "Improved test coverage to 85% by implementing <b>unit and integration tests</b> wired into a continuous integration pipeline.",
+        "Saved 10+ hours per week by automating data pulls and validation checks with <b>cron jobs and Python scripts</b>.",
+      ],
+    },
   ],
 
   // ── PROJECTS ──────────────────────────────────────────────
@@ -102,6 +113,18 @@ module.exports = {
       date: "Feb 2025",
       desc: "Designed a Jenkins CI/CD pipeline with Docker build/scan stages (SonarQube, Trivy) blocking 15+ vulnerabilities before deployment, automated with Helm + ArgoCD on Kubernetes and full observability via Prometheus and Grafana.",
       chips: ["Jenkins", "Docker", "Kubernetes", "Helm", "ArgoCD", "SonarQube", "Trivy", "Prometheus", "Grafana", "AWS"],
+    },
+    {
+      name: "CollabSync",
+      date: "Mar 2026",
+      desc: "Architected a real-time collaborative Kanban by combining WebSockets with Redis Pub/Sub, achieving sub-50ms event delivery with optimistic UI updates and server-side conflict resolution across concurrent sessions.",
+      chips: ["Next.js", "Socket.IO", "Redis", "PostgreSQL", "Docker"],
+    },
+    {
+      name: "PulseLink",
+      date: "Jan 2026",
+      desc: "Constructed a horizontally scalable URL shortener in Go by adding a Redis caching layer and Kubernetes auto-scaling, handling 10k+ req/sec while cutting database read load by 85% at 99.9% uptime.",
+      chips: ["Go", "Redis", "Kubernetes", "Prometheus", "Grafana"],
     },
   ],
 
