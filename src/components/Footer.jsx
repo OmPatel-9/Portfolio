@@ -1,7 +1,6 @@
 import { FOOTER } from "../config";
 
 export default function Footer() {
-  // Replace the ♥ with a styled span
   const parts = FOOTER.split("♥");
   return (
     <footer>

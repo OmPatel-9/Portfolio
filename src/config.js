@@ -200,4 +200,4 @@ export const BATTLE_LINES = [
 ];
 
 // ── FOOTER ──────────────────────────────────────────────────
-export const FOOTER = "built with ♥ by om patel · © 2026 · insert coin to replay";
+export const FOOTER = "built with ♥ by om patel";
