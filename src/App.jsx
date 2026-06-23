@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import StartScreen from "./components/StartScreen";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -118,6 +119,7 @@ export default function App() {
       })}
 
       <Footer />
+      <Analytics />
     </>
   );
 }
