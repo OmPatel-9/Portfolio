@@ -23,7 +23,9 @@ export default function Resume() {
                 <a href={`mailto:${PERSONAL.email}`}>{PERSONAL.email}</a> ·{" "}
                 <a href={PERSONAL.linkedin} target="_blank" rel="noopener">
                   {PERSONAL.linkedinDisplay}
-                </a>
+                </a>{PERSONAL.github && (
+                  <> · <a href={PERSONAL.github} target="_blank" rel="noopener">{PERSONAL.githubDisplay}</a></>
+                )}
               </p>
               <p>{PERSONAL.education}</p>
             </div>

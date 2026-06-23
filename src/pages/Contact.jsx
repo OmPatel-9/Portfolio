@@ -22,6 +22,16 @@ export default function Contact() {
           >
             LINKEDIN
           </a>
+          {PERSONAL.github && (
+            <a
+              className="btn alt"
+              href={PERSONAL.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GITHUB
+            </a>
+          )}
         </div>
         <CritterRow />
       </div>
