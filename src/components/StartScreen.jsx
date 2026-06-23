@@ -46,7 +46,7 @@ export default function StartScreen({ visible, onDismiss }) {
         />
         <p className="press-start">PRESS START</p>
         <p className="start-copy">
-          click anywhere or press ENTER · © 2026 {PERSONAL.name.toLowerCase()}
+          click anywhere or press ENTER
         </p>
       </div>
     </div>

@@ -1,3 +1,4 @@
+// All styles for this component live in src/styles.css (/* CHATBOT */ section)
 import { useState, useRef, useEffect } from "react";
 import { PERSONAL } from "../config";
 import { spriteSVG } from "./PixelCritters";
@@ -85,7 +86,7 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* FAB button with "AI" indicator badge */}
+      {/* FAB button with AI badge */}
       <div className="chat-fab-wrap">
         <span className="chat-fab-badge">AI</span>
         <button
@@ -127,7 +128,6 @@ export default function Chatbot() {
                     dangerouslySetInnerHTML={{ __html: BOT_AVATAR_SPRITE }}
                   />
                 )}
-                {/* Use <p> so React renders text nodes with proper whitespace */}
                 <p className="chat-bubble">{m.content}</p>
               </div>
             ))}
@@ -171,220 +171,6 @@ export default function Chatbot() {
           </div>
         </div>
       )}
-
-      <style>{`
-        /* ── FAB ── */
-        .chat-fab-wrap {
-          position: fixed;
-          bottom: 28px;
-          right: 28px;
-          z-index: 500;
-        }
-        .chat-fab-badge {
-          position: absolute;
-          top: -6px;
-          right: -6px;
-          z-index: 1;
-          background: var(--magenta);
-          color: var(--bg);
-          font-family: 'Press Start 2P', monospace;
-          font-size: 7px;
-          padding: 2px 5px;
-          line-height: 1.4;
-          pointer-events: none;
-          border: 2px solid var(--bg);
-        }
-        .chat-fab {
-          width: 58px;
-          height: 58px;
-          background: var(--panel);
-          border: var(--px) solid var(--line);
-          box-shadow: 4px 4px 0 0 var(--shadow);
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          animation: bob 1.8s ease-in-out infinite;
-          transition: box-shadow .08s, border-color .15s;
-        }
-        .chat-fab:hover {
-          border-color: var(--magenta);
-          box-shadow: 2px 2px 0 0 var(--shadow);
-          animation: none;
-          transform: translate(2px, 2px);
-        }
-        .chat-fab svg { image-rendering: pixelated; display: block; }
-        .chat-fab-x {
-          font-family: 'Press Start 2P', monospace;
-          font-size: 13px;
-          color: var(--muted);
-        }
-
-        /* ── PANEL ── */
-        .chat-panel {
-          position: fixed;
-          bottom: 98px;
-          right: 28px;
-          z-index: 499;
-          width: 340px;
-          max-width: calc(100vw - 48px);
-          height: 480px;
-          max-height: calc(100vh - 130px);
-          display: flex;
-          flex-direction: column;
-          background: var(--bg-2);
-          animation: pageIn .25s ease both;
-        }
-
-        /* ── HEADER ── */
-        .chat-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 10px 14px;
-          border-bottom: var(--px) solid var(--line);
-          background: var(--panel);
-          flex-shrink: 0;
-        }
-        .chat-header-left {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .chat-header-right {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .chat-status-dot {
-          width: 8px;
-          height: 8px;
-          background: var(--green);
-          border-radius: 0;
-          animation: blink 2s steps(1) infinite;
-          flex-shrink: 0;
-        }
-        .chat-title {
-          font-family: 'Press Start 2P', monospace;
-          font-size: 9px;
-          color: var(--green);
-        }
-        .chat-ai-badge {
-          font-family: 'Press Start 2P', monospace;
-          font-size: 7px;
-          color: var(--bg);
-          background: var(--magenta);
-          padding: 2px 5px;
-          line-height: 1.4;
-        }
-        .chat-close {
-          background: none;
-          border: none;
-          color: var(--muted);
-          cursor: pointer;
-          font-size: 13px;
-          padding: 2px 4px;
-          transition: color .12s;
-          font-family: 'Press Start 2P', monospace;
-        }
-        .chat-close:hover { color: var(--red); }
-
-        /* ── MESSAGES ── */
-        .chat-messages {
-          flex: 1;
-          overflow-y: auto;
-          padding: 14px;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          scrollbar-width: thin;
-          scrollbar-color: var(--line) transparent;
-        }
-        .chat-msg {
-          display: flex;
-          gap: 8px;
-          align-items: flex-start;
-        }
-        .chat-msg.user {
-          flex-direction: row-reverse;
-        }
-        .chat-avatar {
-          flex-shrink: 0;
-          margin-top: 4px;
-        }
-        .chat-avatar svg { image-rendering: pixelated; display: block; }
-
-        /* ── BUBBLES ── */
-        .chat-bubble {
-          font-family: 'IBM Plex Mono', monospace;
-          font-size: 13px;
-          line-height: 1.6;
-          padding: 8px 12px;
-          border: 2px solid var(--line);
-          max-width: 82%;
-          /* fix: preserve spaces and wrap correctly */
-          white-space: pre-wrap;
-          word-break: break-word;
-          margin: 0;
-        }
-        .chat-msg.assistant .chat-bubble {
-          background: var(--panel);
-          color: var(--text);
-          border-color: var(--line);
-        }
-        .chat-msg.user .chat-bubble {
-          background: rgba(82,255,168,.08);
-          color: var(--green);
-          border-color: var(--green);
-        }
-
-        /* ── TYPING ── */
-        .chat-typing {
-          letter-spacing: 2px;
-        }
-        .chat-typing span {
-          animation: blink 1s steps(1) infinite;
-          font-size: 20px;
-        }
-        .chat-typing span:nth-child(2) { animation-delay: .3s; }
-        .chat-typing span:nth-child(3) { animation-delay: .6s; }
-
-        /* ── INPUT ── */
-        .chat-input-row {
-          display: flex;
-          gap: 8px;
-          padding: 10px 12px;
-          border-top: var(--px) solid var(--line);
-          background: var(--panel);
-          flex-shrink: 0;
-        }
-        .chat-input {
-          flex: 1;
-          background: var(--bg);
-          border: 2px solid var(--line);
-          color: var(--text);
-          font-family: 'IBM Plex Mono', monospace;
-          font-size: 13px;
-          padding: 8px 10px;
-          outline: none;
-          transition: border-color .12s;
-          min-width: 0;
-        }
-        .chat-input:focus { border-color: var(--green); }
-        .chat-input::placeholder { color: var(--muted); }
-        .chat-input:disabled { opacity: .5; }
-        .chat-send {
-          padding: 8px 12px !important;
-          font-size: 11px !important;
-          box-shadow: 3px 3px 0 0 var(--shadow) !important;
-          flex-shrink: 0;
-        }
-        .chat-send:disabled {
-          opacity: .4;
-          cursor: not-allowed;
-          pointer-events: none;
-        }
-      `}</style>
     </>
   );
 }
