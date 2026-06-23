@@ -40,7 +40,7 @@ module.exports = {
       "Outside the lab, I've integrated LLMs into production web apps, built agentic RAG systems, and shipped DevSecOps pipelines. I like problems where <b>performance, reliability, and intelligence</b> all matter at once.",
     ],
     stats: [
-      { num: "3",    label: "engineering roles" },
+      { num: "4",    label: "engineering roles" },
       { num: "100+", label: "req/min sustained in prod LLM integration" },
       { num: "38%",  label: "retrieval precision improvement via semantic chunking" },
     ],
