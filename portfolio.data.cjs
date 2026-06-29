@@ -53,30 +53,33 @@ module.exports = {
       date: "May 2026 - Present",
       org: "California State University, Long Beach · Long Beach, CA",
       bullets: [
-        "Built multithreaded <b>Java/C++</b> programs studying parallel execution, optimizing CPU-bound workloads across thread pools by tuning task-scheduling and workload-partitioning strategies.",
-        "Developing an <b>AI agent on a C#/.NET backend</b> integrated with ServiceNow that classifies, triages, and auto-resolves incident and service-request tickets, on track to reduce organization-wide ticket volume by 30%.",
-        "Built live dashboards over the <b>ServiceNow REST API</b> surfacing ticket trends, recurring failure modes, and high-volume categories, now used to prioritize which resolution workflows to automate first.",
-        "Designed <b>confidence-based routing</b> that resolves tickets only on strong knowledge-base retrieval and escalates ambiguous cases to human agents, scaling automation without sacrificing resolution accuracy.",
+        "Developing an <b>AI agent on a C#/.NET backend</b> integrated with ServiceNow that classifies, triages, and auto-resolves incident and service-request tickets, on track to cut organization-wide ticket volume by 30%.",
+        "Delivered real-time <b>ServiceNow REST API</b> dashboards surfacing ticket trends, recurring failure modes, and high-volume categories, equipping 5 support agents to prioritize automation targets and reclaim 10 hrs/week of manual triage.",
+        "Designed <b>confidence-based routing</b> that resolves tickets only on strong knowledge-base retrieval and escalates ambiguous cases to human agents, scaling automation while preserving resolution accuracy.",
+        "Implemented multithreaded <b>Java/C++</b> programs to study parallel execution, tuning task-scheduling and workload-partitioning to accelerate CPU-bound workloads across thread pools.",
+        "Partnered with faculty and fellow researchers through weekly reviews, pair-debugging sessions, and shared benchmarking to keep experiments reproducible across the team.",
       ],
     },
     {
       role: "Software Engineer Intern",
-      date: "Jul 2025 - Present",
+      date: "Jul 2025 - Jun 2026",
       org: "Beach Building Services (CSULB) · Long Beach, CA",
       bullets: [
-        "Engineered and integrated a <b>Gemini LLM</b> feature into a production web application using structured prompt pipelines, input validation, and rate-aware fallbacks, sustaining 100+ concurrent requests/min with zero downtime.",
-        "Designed and implemented a normalized <b>PostgreSQL</b> relational schema with analytics views, indexed lookups, and aggregation queries, powering stakeholder reporting across professor and course rating data.",
-        "Optimized performance-critical <b>C/C++</b> data parsing and validation utilities on Linux, reducing processing time by 30% via memory-efficient algorithms and low-overhead I/O.",
+        "Integrated a <b>Gemini LLM</b> feature into a live web application, using prompt pipelines, input validation, and rate-aware fallbacks to sustain 100+ requests/min with zero downtime.",
+        "Modeled a normalized <b>PostgreSQL</b> schema with analytics views, indexed lookups, and aggregation queries, powering stakeholder reporting across professor and course rating data.",
+        "Optimized performance-critical <b>C/C++</b> parsing and validation utilities on Linux, reducing processing time 30% and unlocking higher data throughput for downstream reporting via memory-efficient algorithms and low-overhead I/O.",
+        "Collaborated across a cross-functional <b>Scrum team</b> through sprint planning, code reviews, and daily stand-ups, shipping features on a biweekly release cadence.",
       ],
     },
     {
       role: "AI Engineer Intern",
       date: "Sep 2025 - Dec 2025",
-      org: "Impacter AI · Remote",
+      org: "Impacter AI · San Francisco, CA",
       bullets: [
-        "Built and deployed <b>Python REST API microservices</b> with ETL data-transformation pipelines that integrated LLM inference into production, reducing end-to-end latency by 180ms through async processing and response caching.",
-        "Resolved concurrent-request <b>race conditions</b> and improved LLM output accuracy by 12% using structured output schemas, post-processing validation, and systematic prompt engineering.",
-        "Fine-tuned <b>GPT-3 and Llama 2</b> with few-shot prompting and quantization, cutting compute costs by 35% and average token usage by 28% across production workloads.",
+        "Deployed <b>Python REST API microservices</b> with ETL data-transformation pipelines that embedded LLM inference into production, trimming end-to-end latency by 180ms through async processing and response caching.",
+        "Resolved concurrent-request <b>race conditions</b> and lifted LLM output accuracy by 12% through output schemas, post-processing validation, and prompt engineering.",
+        "Fine-tuned <b>GPT-3 and Llama 2</b> with few-shot prompting and quantization, cutting compute costs by 35% and average token usage by 28% across workloads.",
+        "Coordinated with backend and ML engineers via <b>pull-request reviews</b> and design docs, mentoring a peer intern on prompt-engineering practices.",
       ],
     },
     {
@@ -103,7 +106,7 @@ module.exports = {
     },
     {
       name: "SimmSilos",
-      date: "May 2026",
+      date: "Mar 2026",
       desc: "Architected a multi-service developer platform behind an Apache gateway with ephemeral Docker environments, a TypeScript VS Code extension with a custom virtual filesystem, and a FastAPI backend for auth, branch/task assignment, and silo file access.",
       chips: ["Python", "FastAPI", "TypeScript", "PostgreSQL", "Redis", "Docker", "Apache"],
       // link: "https://github.com/OmPatel-9/simmsilos",
@@ -135,19 +138,17 @@ module.exports = {
       date: "May 2026",
       tech: "Python, FastAPI, LangChain, PostgreSQL, pgvector, OpenAI API, GitHub API, Redis, BullMQ, Docker",
       bullets: [
-        "Engineered an agentic RAG system over GitHub repositories using LangChain tool-calling, enabling multi-step code understanding, architecture explanation, and bug detection across 50k+ line codebases.",
-        "Orchestrated an async distributed embedding pipeline with BullMQ and pgvector, applying semantic chunking strategies to improve retrieval precision by 38% over naive fixed-size approaches.",
-        "Generated structured onboarding docs, refactor suggestions, and architectural summaries via chained LLM prompts grounded in retrieved context, surfacing actionable insights in under 5 seconds.",
+        "Engineered an agentic RAG system over GitHub repositories with LangChain tool-calling, enabling multi-step code understanding, architecture explanation, and bug detection across 50k+ line codebases.",
+        "Orchestrated an asynchronous distributed embedding pipeline with BullMQ and pgvector, applying semantic chunking to improve retrieval precision by 38% over naive fixed-size approaches.",
       ],
     },
     {
       name: "SimmSilos",
-      date: "May 2026",
+      date: "Mar 2026",
       tech: "Python, FastAPI, TypeScript, PostgreSQL, Redis, Docker, Apache",
       bullets: [
-        "Architected a multi-service platform behind an Apache gateway: a FastAPI service for auth, branch/task assignment, and silo file access, sharing state across services through PostgreSQL + Redis.",
-        "Built a TypeScript VS Code extension implementing a custom virtual filesystem with full save support, so developers browse, edit, and write files inside isolated silos alongside live task and branch sidebars.",
-        "Engineered ephemeral developer environments: a port registry assigns each developer a dedicated Docker container on a unique port; on branch submission the container is destroyed, logs persisted for audit, and the port freed for the next developer.",
+        "Created a TypeScript VS Code extension implementing a custom virtual filesystem with full save support, letting developers browse, edit, and write files inside isolated silos alongside live task and branch sidebars.",
+        "Provisioned ephemeral developer environments: a port registry assigns each developer a dedicated Docker container on a unique port; on branch submission the container tears down, logs persist for audit, and the port frees for the next developer.",
       ],
     },
     {
@@ -155,9 +156,8 @@ module.exports = {
       date: "Feb 2025",
       tech: "Jenkins, Docker, Kubernetes, Helm, ArgoCD, SonarQube, Trivy, Prometheus, Grafana, AWS",
       bullets: [
-        "Designed a Jenkins pipeline with Docker build/scan (SonarQube, Trivy), blocking 15+ vulnerabilities before deployment.",
+        "Built a Jenkins pipeline with Docker build/scan (SonarQube, Trivy), blocking 15+ vulnerabilities before deployment.",
         "Automated deployments with Helm + ArgoCD on Kubernetes, streamlining GitOps workflows and improving delivery speed.",
-        "Integrated Prometheus and Grafana, enhancing system monitoring and reliability for production use.",
       ],
     },
   ],
@@ -178,7 +178,7 @@ module.exports = {
     },
     {
       heading: "SYSTEMS & TOOLS",
-      chips: ["Linux", "Git", "Docker", "Kubernetes", "CI/CD", "GitHub Actions", "REST APIs", "WebSockets", "Prometheus", "Grafana", "LangSmith", "Agile"],
+      chips: ["Linux", "Git", "Docker", "Kubernetes", "CI/CD", "GitHub Actions", "REST APIs", "WebSockets", "Prometheus", "Grafana", "LangSmith", "Agile/Scrum"],
     },
   ],
 
@@ -187,7 +187,7 @@ module.exports = {
     { label: "Languages",       value: "Python, SQL, C, C++, Go, Java, JavaScript, TypeScript" },
     { label: "AI/ML & Data",    value: "PyTorch, LangChain, RAG, Embeddings, Agents, Fine-tuning, Prompt Engineering, Airflow, dbt, Kafka, Spark, ETL/ELT, pandas, NumPy, OpenCV, MLflow" },
     { label: "Backend & Storage", value: "FastAPI, Node.js, Flask, PostgreSQL, pgvector, BigQuery, MySQL, MongoDB, Redis, AWS, Google Cloud, Firebase" },
-    { label: "Systems & Tools", value: "Linux, Git, Docker, Kubernetes, CI/CD, GitHub Actions, REST APIs, WebSockets, Prometheus, Grafana, LangSmith, Agile" },
+    { label: "Systems & Tools", value: "Linux, Git, Docker, Kubernetes, CI/CD, GitHub Actions, REST APIs, WebSockets, Prometheus, Grafana, LangSmith, Agile/Scrum" },
   ],
 
   // ── CONTACT ───────────────────────────────────────────────
