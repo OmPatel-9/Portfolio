@@ -24,11 +24,11 @@ module.exports = {
   // ── HERO ──────────────────────────────────────────────────
   HERO: {
     kicker: "> NEW GAME STARTED",
-    headline: "Hi, I'm Om Patel.\nI build with AI.",
+    headline: "Hi, I'm Om Patel.\nSoftware Engineer & AI Builder.",
     tagline: "CS student at CSULB ('27) building AI systems, LLM-powered products, and backends that hold up under load.",
     roles: [
-      "Currently working as <b>Software Engineer Intern @ Beach Building Services</b>",
-      "And as <b>Undergraduate Research Assistant @ California State University, Long Beach</b>, focused on AI agents and parallel systems",
+      "Currently working as <b>Undergraduate Research Assistant @ California State University, Long Beach</b>, focused on AI agents and parallel systems",
+      "Previously <b>Software Engineer Intern @ Beach Building Services</b> · Jul 2025 - Jun 2026",
     ],
   },
 
